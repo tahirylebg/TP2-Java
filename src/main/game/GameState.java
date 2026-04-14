@@ -6,8 +6,8 @@ public class GameState {
     private boolean gameOver;
     private boolean paused;
     private int totalLines;
-    // + getters/setters
 
+    // Méthode pour ajouter des points au score en fonction du nombre de lignes supprimées
     public void addScore(int linesCleared) {
         int points = switch (linesCleared) {
             case 1 -> 100;

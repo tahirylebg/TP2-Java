@@ -5,7 +5,10 @@ import main.model.Tetromino;
 import main.model.TetrominoFactory;
 import main.ui.GameRenderer;
 import main.ui.SidePanel;
-
+/*
+    La classe GameLoop est responsable de la logique principale du jeu, y compris la gestion du temps, le déplacement des pièces, la vérification des collisions et la mise à jour de l'état du jeu. Elle utilise AnimationTimer pour créer une boucle de jeu qui s'exécute à chaque frame, permettant ainsi de faire descendre les
+    pièces automatiquement et de réagir aux entrées du joueur en temps réel.
+ */
 public class GameLoop extends AnimationTimer {
     private Board board;
     private GameState state;
@@ -16,6 +19,7 @@ public class GameLoop extends AnimationTimer {
     private long lastUpdate = 0;
     private long dropInterval = 500_000_000L;
 
+    // Constructeur pour initialiser les composants du jeu
     public GameLoop(Board board, GameState state, GameRenderer renderer, SidePanel sidePanel) {
         this.board = board;
         this.state = state;
@@ -46,6 +50,7 @@ public class GameLoop extends AnimationTimer {
         return y;
     }
 
+    // Méthode pour faire apparaître la prochaine pièce et vérifier si le jeu est terminé
     public void spawnNextTetromino() {
         current = nextTetromino;
         nextTetromino = TetrominoFactory.generateRandom();
@@ -54,6 +59,8 @@ public class GameLoop extends AnimationTimer {
             state.setGameOver(true);
         }
     }
+
+    // Méthode pour verrouiller la pièce actuelle sur le plateau, vérifier les lignes complètes et mettre à jour le score et le niveau
 
     public void lockCurrentTetromino() {
         board.placeTetromino(current);

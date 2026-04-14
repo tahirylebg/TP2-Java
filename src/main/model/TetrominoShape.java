@@ -1,5 +1,10 @@
 package main.model;
 
+/* 
+ * Enumération représentant les différentes formes de Tetrominos dans le jeu de Tetris.
+ * Chaque forme est définie par une série de rotations, qui sont des matrices 2D indiquant la disposition des blocs pour chaque rotation.
+ */
+
 public enum TetrominoShape {
     // Definir les formes des tetrominos avec leurs rotations
     I(new int[][][] {

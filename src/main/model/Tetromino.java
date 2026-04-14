@@ -8,6 +8,7 @@ public class Tetromino {
     private int x, y;
     private Color color;
 
+    // Constructeur pour initialiser un Tetromino avec une forme spécifique
     public Tetromino(TetrominoShape shape) {
     this.shape = shape;
     this.rotationIndex = 0;

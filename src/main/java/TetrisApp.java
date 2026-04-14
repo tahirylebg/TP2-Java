@@ -11,7 +11,9 @@ import main.ui.SidePanel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
-
+/* 
+ * Classe principale de l'application Tetris
+ */
 public class TetrisApp extends Application {
     
     @Override
@@ -19,7 +21,7 @@ public class TetrisApp extends Application {
         // 1. Canvas
         Canvas canvas = new Canvas(300, 600);
 
-        // 2. SidePanel et Renderer
+        //SidePanel affiche les informations du jeu telles que le score, le niveau et la prochaine pièce. GameRenderer est responsable de dessiner le plateau de jeu et les pièces actives sur le Canvas.
         SidePanel sidePanel = new SidePanel();
         GameRenderer renderer = new GameRenderer(canvas);
 
@@ -27,10 +29,10 @@ public class TetrisApp extends Application {
         HBox root = new HBox();
         root.getChildren().addAll(canvas, sidePanel);
 
-        // 5. Scene + Stage
+        // Scene + Stage
         Scene scene = new Scene(root);
 
-        // 3. Game objects
+        // Game objects
         Board board = new Board();
         GameState state = new GameState();
         GameLoop gameLoop = new GameLoop(board, state, renderer, sidePanel);

@@ -7,6 +7,11 @@ import main.game.GameLoop;
 import main.game.GameState;
 import main.model.Tetromino;
 
+/*
+    InputHandler est responsable de gérer les entrées clavier du joueur. 
+    Il écoute les événements de touche pressée et modifie l'état du jeu en conséquence, 
+    comme déplacer ou faire tourner la pièce active, ou mettre le jeu en pause.
+*/
 public class InputHandler {
     public InputHandler(Scene scene, GameLoop gameLoop, Board board, GameState state) {
         scene.setOnKeyPressed(event -> {

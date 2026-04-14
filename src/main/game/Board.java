@@ -6,8 +6,8 @@ import main.model.Tetromino;
     Il gère la grille, vérifie les positions valides pour les tetrominos et place les tetrominos sur la grille.
 */
 public class Board {
-    private static final int WIDTH = 10;
-    private static final int HEIGHT = 20;
+    private static final int WIDTH = 10; // Largeur du plateau en nombre de cellules
+    private static final int HEIGHT = 20; // Hauteur du plateau en nombre de cellules
     private int[][] grid;
 
     // Constructeur pour initialiser la grille du plateau
@@ -64,9 +64,11 @@ public class Board {
         }
     }
 
+    // Méthode pour vérifier et supprimer les lignes complètes du plateau
     public int clearLines() {
         int cleared = 0;
 
+        // Parcourir les lignes du bas vers le haut pour vérifier les lignes complètes
         for (int row = HEIGHT - 1; row >= 0; row--) {
             boolean complete = true;
             for (int col = 0; col < WIDTH; col++) {

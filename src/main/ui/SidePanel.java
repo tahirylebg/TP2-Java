@@ -1,12 +1,16 @@
 package main.ui;
 
-import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.Canvas; 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import main.model.Tetromino;
 
+/*
+    SidePanel affiche les informations du jeu telles que le score, le niveau et la prochaine pièce. 
+    Il utilise un VBox pour organiser les éléments graphiques verticalement.
+*/
 public class SidePanel extends VBox {
     private Label scoreLabel; // Affiche le score actuel du joueur
     private Label levelLabel; // Affiche le niveau actuel du joueur

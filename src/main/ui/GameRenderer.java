@@ -92,6 +92,7 @@ public class GameRenderer {
 
     
 
+    // Méthode pour convertir un entier de la grille en une couleur correspondante
     private Color getColorFromInt(int value) {
         return switch (value) {
             case 1 -> Color.CYAN;
