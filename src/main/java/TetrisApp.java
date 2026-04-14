@@ -6,6 +6,7 @@ import main.game.Board;
 import main.game.GameLoop;
 import main.game.GameState;
 import main.ui.GameRenderer;
+import main.ui.InputHandler;
 import main.ui.SidePanel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.HBox;
@@ -22,18 +23,20 @@ public class TetrisApp extends Application {
         SidePanel sidePanel = new SidePanel();
         GameRenderer renderer = new GameRenderer(canvas);
 
-        // 3. Game objects
-        Board board = new Board();
-        GameState state = new GameState();
-        GameLoop gameLoop = new GameLoop(board, state, renderer);
-        gameLoop.start();
-
         // 4. HBox
         HBox root = new HBox();
         root.getChildren().addAll(canvas, sidePanel);
 
         // 5. Scene + Stage
         Scene scene = new Scene(root);
+
+        // 3. Game objects
+        Board board = new Board();
+        GameState state = new GameState();
+        GameLoop gameLoop = new GameLoop(board, state, renderer);
+        InputHandler inputHandler = new InputHandler(scene, gameLoop, board, state);
+        gameLoop.start();
+
         stage.setTitle("Tetris");
         stage.setScene(scene);
         stage.show();

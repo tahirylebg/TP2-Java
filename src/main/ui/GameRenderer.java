@@ -22,7 +22,7 @@ public class GameRenderer {
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
     }
-
+    
     public void render(Board board, Tetromino activeTetromino) {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -33,8 +33,9 @@ public class GameRenderer {
         // Grille fixe
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
-                if (board.getCell(col, row) != 0) {
-                    gc.setFill(Color.DARKGRAY);
+                int cell = board.getCell(col, row);
+                if (cell != 0) {
+                    gc.setFill(getColorFromInt(cell));
                     gc.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                     gc.setStroke(Color.BLACK);
                     gc.strokeRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -59,6 +60,19 @@ public class GameRenderer {
                 }
             }
         }
+    }
+
+    private Color getColorFromInt(int value) {
+        return switch (value) {
+            case 1 -> Color.CYAN;
+            case 2 -> Color.YELLOW;
+            case 3 -> Color.MAGENTA;
+            case 4 -> Color.GREEN;
+            case 5 -> Color.RED;
+            case 6 -> Color.BLUE;
+            case 7 -> Color.ORANGE;
+            default -> Color.DARKGRAY;
+        };
     }
 }
 

@@ -49,6 +49,7 @@ public class Board {
     // Place un tetromino sur le plateau en mettant à jour la grille
     public void placeTetromino(Tetromino t) {
         int[][] shape = t.getCurrentShape();
+        int colorCode = t.getShape().ordinal() + 1;
 
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
@@ -56,7 +57,7 @@ public class Board {
                     int col = t.getX() + j;
                     int row = t.getY() + i;
                     if (row >= 0 && row < HEIGHT && col >= 0 && col < WIDTH) {
-                        grid[row][col] = 1;
+                        grid[row][col] = colorCode;
                     }
                 }
             }
