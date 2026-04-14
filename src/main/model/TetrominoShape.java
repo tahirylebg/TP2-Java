@@ -126,4 +126,8 @@ public enum TetrominoShape {
     public int[][] getRotation(int index) {
         return rotations[index];
     }
+
+    public int getRotationsCount() {
+        return rotations.length;
+    }
 }
