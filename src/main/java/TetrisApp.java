@@ -23,7 +23,7 @@ public class TetrisApp extends Application {
         SidePanel sidePanel = new SidePanel();
         GameRenderer renderer = new GameRenderer(canvas);
 
-        // 4. HBox
+        //HBox sert à organiser le Canvas et le SidePanel côte à côte 
         HBox root = new HBox();
         root.getChildren().addAll(canvas, sidePanel);
 
@@ -33,7 +33,7 @@ public class TetrisApp extends Application {
         // 3. Game objects
         Board board = new Board();
         GameState state = new GameState();
-        GameLoop gameLoop = new GameLoop(board, state, renderer);
+        GameLoop gameLoop = new GameLoop(board, state, renderer, sidePanel);
         InputHandler inputHandler = new InputHandler(scene, gameLoop, board, state);
         gameLoop.start();
 

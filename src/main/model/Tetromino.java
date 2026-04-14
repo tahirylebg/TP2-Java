@@ -11,7 +11,7 @@ public class Tetromino {
     public Tetromino(TetrominoShape shape) {
     this.shape = shape;
     this.rotationIndex = 0;
-    this.x = 3;
+    this.x = (10 - shape.getRotation(0)[0].length) / 2;
     this.y = 0;
     this.color = switch(shape) {
         case I -> Color.CYAN;

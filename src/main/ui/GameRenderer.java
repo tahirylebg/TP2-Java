@@ -3,7 +3,9 @@ package main.ui;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import main.game.Board;
+import main.game.GameState;
 import main.model.Tetromino;
 
 /*
@@ -23,7 +25,7 @@ public class GameRenderer {
         this.gc = canvas.getGraphicsContext2D();
     }
     
-    public void render(Board board, Tetromino activeTetromino) {
+    public void render(Board board, Tetromino activeTetromino, GameState state) {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Fond de la grille
@@ -60,7 +62,15 @@ public class GameRenderer {
                 }
             }
         }
+
+        if (state.isGameOver()) {
+            gc.setFill(Color.RED);
+            gc.setFont(new Font(30));
+            gc.fillText("GAME OVER", 60, 300);
+        }
     }
+
+    
 
     private Color getColorFromInt(int value) {
         return switch (value) {

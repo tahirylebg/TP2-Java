@@ -5,7 +5,21 @@ public class GameState {
     private int level;
     private boolean gameOver;
     private boolean paused;
+    private int totalLines;
     // + getters/setters
+
+    public void addScore(int linesCleared) {
+        int points = switch (linesCleared) {
+            case 1 -> 100;
+            case 2 -> 300;
+            case 3 -> 500;
+            case 4 -> 800;
+            default -> 0;
+        };
+        score += points;
+        totalLines += linesCleared;
+        level = totalLines / 10 + 1;
+        }
 
         public GameState() {
             score = 0; // Initialiser le score à 0

@@ -4,19 +4,22 @@ import javafx.animation.AnimationTimer;
 import main.model.Tetromino;
 import main.model.TetrominoFactory;
 import main.ui.GameRenderer;
+import main.ui.SidePanel;
 
 public class GameLoop extends AnimationTimer {
     private Board board;
     private GameState state;
     private Tetromino current;
     private GameRenderer renderer;
+    private SidePanel sidePanel;
     private long lastUpdate = 0;
     private long dropInterval = 500_000_000L;
 
-    public GameLoop(Board board, GameState state, GameRenderer renderer) {
+    public GameLoop(Board board, GameState state, GameRenderer renderer, SidePanel sidePanel) {
         this.board = board;
         this.state = state;
         this.renderer = renderer;
+        this.sidePanel = sidePanel;
         this.current = TetrominoFactory.generateRandom();
     }
 
@@ -31,6 +34,21 @@ public class GameLoop extends AnimationTimer {
         }
     }
 
+    public void lockCurrentTetromino() {
+        board.placeTetromino(current);
+
+        int lines = board.clearLines();
+        if (lines > 0) {
+            state.addScore(lines);
+            dropInterval = Math.max(100_000_000L,
+                500_000_000L - (state.getLevel() - 1) * 50_000_000L);
+            sidePanel.updateScore(state.getScore());
+            sidePanel.updateLevel(state.getLevel());
+        }
+
+        spawnNextTetromino();
+    }
+
     @Override
     public void handle(long now) {
         if (state.isGameOver() || state.isPaused()) return;
@@ -42,13 +60,12 @@ public class GameLoop extends AnimationTimer {
             // 2. Si position invalide → annule, place, génère nouvelle pièce
             if (!board.isValidPosition(current)) {
                 current.setY(current.getY() - 1);
-                board.placeTetromino(current);
-                spawnNextTetromino();
+                lockCurrentTetromino();
             }
 
             lastUpdate = now;
         }
 
-        renderer.render(board, current);
+        renderer.render(board, current, state);
     }
 }

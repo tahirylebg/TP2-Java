@@ -64,6 +64,40 @@ public class Board {
         }
     }
 
+    public int clearLines() {
+        int cleared = 0;
+
+        for (int row = HEIGHT - 1; row >= 0; row--) {
+            boolean complete = true;
+            for (int col = 0; col < WIDTH; col++) {
+                if (grid[row][col] == 0) {
+                    complete = false;
+                    break;
+                }
+            }
+
+            if (complete) {
+                cleared++;
+                for (int moveRow = row; moveRow > 0; moveRow--) {
+                    System.arraycopy(grid[moveRow - 1], 0, grid[moveRow], 0, WIDTH);
+                }
+                for (int col = 0; col < WIDTH; col++) {
+                    grid[0][col] = 0;
+                }
+                row++; // recheck this row after shifting down
+            }
+        }
+
+        // Avant le return
+        System.out.println("Dernière ligne: ");
+        for (int col = 0; col < WIDTH; col++) {
+            System.out.print(grid[HEIGHT-1][col] + " ");
+        }
+        System.out.println();
+
+        return cleared;
+    }
+
     // Méthode pour obtenir la valeur d'une cellule de la grille
     public int getCell(int x, int y) {
         if (y < 0 || y >= HEIGHT || x < 0 || x >= WIDTH) {

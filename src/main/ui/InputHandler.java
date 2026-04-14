@@ -54,8 +54,7 @@ public class InputHandler {
                         current.setY(current.getY() + 1);
                     }
                     current.setY(current.getY() - 1);
-                    board.placeTetromino(current);
-                    gameLoop.spawnNextTetromino();
+                    gameLoop.lockCurrentTetromino();
                 }
                 case P -> state.setPaused(!state.isPaused());
                 default -> {
