@@ -1,7 +1,7 @@
 package main.model;
 
 import javafx.scene.paint.Color;
-
+// Classe représentant un Tetromino dans le jeu de Tetris , c'est une pièce composée de 4 blocs carrés, avec une forme spécifique et une couleur associée.
 public class Tetromino {
     private TetrominoShape shape;
     private int rotationIndex;
@@ -21,6 +21,7 @@ public class Tetromino {
         case Z -> Color.RED;
         case J -> Color.BLUE;
         case L -> Color.ORANGE;
+        
 
     };
 }
