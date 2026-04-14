@@ -88,13 +88,6 @@ public class Board {
             }
         }
 
-        // Avant le return
-        System.out.println("Dernière ligne: ");
-        for (int col = 0; col < WIDTH; col++) {
-            System.out.print(grid[HEIGHT-1][col] + " ");
-        }
-        System.out.println();
-
         return cleared;
     }
 
