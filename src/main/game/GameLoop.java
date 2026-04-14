@@ -10,6 +10,7 @@ public class GameLoop extends AnimationTimer {
     private Board board;
     private GameState state;
     private Tetromino current;
+    private Tetromino nextTetromino;
     private GameRenderer renderer;
     private SidePanel sidePanel;
     private long lastUpdate = 0;
@@ -21,6 +22,8 @@ public class GameLoop extends AnimationTimer {
         this.renderer = renderer;
         this.sidePanel = sidePanel;
         this.current = TetrominoFactory.generateRandom();
+        this.nextTetromino = TetrominoFactory.generateRandom();
+        this.sidePanel.updateNextPiece(this.nextTetromino);
     }
 
     public Tetromino getCurrentTetromino() {
@@ -28,7 +31,9 @@ public class GameLoop extends AnimationTimer {
     }
 
     public void spawnNextTetromino() {
-        current = TetrominoFactory.generateRandom();
+        current = nextTetromino;
+        nextTetromino = TetrominoFactory.generateRandom();
+        sidePanel.updateNextPiece(nextTetromino);
         if (!board.isValidPosition(current)) {
             state.setGameOver(true);
         }
