@@ -30,6 +30,22 @@ public class GameLoop extends AnimationTimer {
         return current;
     }
 
+    public int getGhostPieceY() {
+        int originalY = current.getY();
+        int y = originalY;
+        
+        while (true) {
+            current.setY(y + 1);
+            if (!board.isValidPosition(current)) {
+                break;
+            }
+            y++;
+        }
+        
+        current.setY(originalY); // Restore original position
+        return y;
+    }
+
     public void spawnNextTetromino() {
         current = nextTetromino;
         nextTetromino = TetrominoFactory.generateRandom();
@@ -71,6 +87,6 @@ public class GameLoop extends AnimationTimer {
             lastUpdate = now;
         }
 
-        renderer.render(board, current, state);
+        renderer.render(board, current, state, getGhostPieceY());
     }
 }

@@ -25,7 +25,7 @@ public class GameRenderer {
         this.gc = canvas.getGraphicsContext2D();
     }
     
-    public void render(Board board, Tetromino activeTetromino, GameState state) {
+    public void render(Board board, Tetromino activeTetromino, GameState state, int ghostY) {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Fond de la grille
@@ -43,6 +43,26 @@ public class GameRenderer {
                     gc.strokeRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }
             }
+        }
+
+        // Ghost piece
+        if (activeTetromino != null) {
+            int[][] shape = activeTetromino.getCurrentShape();
+            gc.setFill(Color.gray(0.3));
+            gc.setGlobalAlpha(0.5);
+
+            for (int i = 0; i < shape.length; i++) {
+                for (int j = 0; j < shape[i].length; j++) {
+                    if (shape[i][j] == 1) {
+                        int col = activeTetromino.getX() + j;
+                        int row = ghostY + i;
+                        gc.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.setStroke(Color.GRAY);
+                        gc.strokeRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                    }
+                }
+            }
+            gc.setGlobalAlpha(1.0);
         }
 
         // Pièce active
